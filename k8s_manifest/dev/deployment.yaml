@@ -17,10 +17,11 @@ spec:
       containers:
       - name: demo
         image: fxzoa/demo
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         - containerPort: 9010
+        args: ["-Dfile.encoding=UTF-8", "-Dcom.sun.management.jmxremote=true"]
         env:
         - name: DD_AGENT_HOST
           valueFrom:
