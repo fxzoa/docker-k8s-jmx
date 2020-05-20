@@ -1,0 +1,11 @@
+###
+
+GET http://localhost:32080/api/v1/hello
+
+###
+
+GET http://localhost:32080/api/v1/actuator/health/
+
+###
+
+GET https://system-apigw.sprint.cdx.au.com/api/batch/dashboard

@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: demo-service
+  labels:
+    app: demo-service
+spec:
+  type: NodePort
+  ports:
+    - name: demo-http-port
+      port: 8080
+      targetPort: 8080
+    - name: demo-jmx-port
+      port: 9010
+      targetPort: 9010
+  selector:
+    app: demo

@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.3.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'application'
+
+group = 'com.fxzoa'
+version = '1.0.0'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2'
+}
+
+mainClassName = "com.fxzoa.demo.DemoApplication"
+
+application {
+    applicationDefaultJvmArgs = ['-Djava.rmi.server.hostname=localhost', '-Dcom.sun.management.jmxremote.rmi.port=9010', '-Dcom.sun.management.jmxremote.port=9010', '-Dcom.sun.management.jmxremote.ssl=false', '-Dcom.sun.management.jmxremote.authenticate=false']
+}
+
+test {
+	useJUnitPlatform()
+}

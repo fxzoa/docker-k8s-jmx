@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scdf-config-map
+  labels:
+    app: scdf-config-map
+data:
+  application.yaml: |-
+    spring:
+      cloud:
+        dataflow:
+          server-uri: http://scdf-server/
+          features:
+            skipper-enabled: false
+            streams-enabled: false
+            analytics-enabled: false
+            schedules-enabled: true
+            tasks-enabled: true
+          task:
+            platform:
+              kubernetes:
+                backoffLimit: 0
+                accounts:
+                  default:
+                    namespace: scdf
+                    imagePullPolicy: IfNotPresent
+                    maxTerminatedErrorRestarts: 0
+                    createJob: true
+            scheduler-task-launcher-url: docker://springcloud/spring-cloud-dataflow-scheduler-task-launcher:2.3.1.RELEASE
+            scheduler-task-launcher-backoffLimit: 0
+        scheduler:
+          kubernetes:
+            imagePullPolicy: IfNotPresent
+            namespace: scdf
+            maxTerminatedErrorRestarts: 0
+            maxCrashLoopBackOffRestarts: Never
+            backoffLimit: 0
+      profiles:
+        active: dev
+      datasource:
+        url: jdbc:postgresql://cdx-aws-tky-dev-rds-ckkbdb01.cqg4zq4j0lk8.ap-northeast-1.rds.amazonaws.com:5432/dev_batch?currentSchema=meta
+        username: devbatch
+        password: devbatch
+        driverClassName: org.postgresql.Driver
